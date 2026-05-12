@@ -2421,6 +2421,361 @@
     }
     #mobile-menu-btn svg { width: 18px; height: 18px; }
 
+    /* ============================================================
+       PSYCHOLOGICAL DOCTRINE — Design Tokens & Component Library
+       ============================================================ */
+
+    :root {
+      /* Triple-layer color semantics (Memory Anchors) */
+      --layer-mech:    #0EA5E9;
+      --layer-mech-bg: rgba(14,165,233,0.07);
+      --layer-trap:    #EF4444;
+      --layer-trap-bg: rgba(239,68,68,0.07);
+      --layer-tactic:  var(--accent);
+      --layer-tactic-bg: rgba(102,252,241,0.06);
+
+      /* Psychological school colors */
+      --freud-purple:  #8B5CF6;
+      --plutchik-joy:  #FACC15;
+      --plutchik-trust:#22C55E;
+      --plutchik-fear: #7C3AED;
+      --plutchik-anger:#DC2626;
+      --plutchik-sad:  #2563EB;
+      --plutchik-surp: #F97316;
+      --plutchik-disg: #65A30D;
+      --plutchik-anti: #64748B;
+
+      /* Signal colors */
+      --insight:       #F59E0B;
+      --danger:        #B91C1C;
+      --danger-bg:     rgba(185,28,28,0.08);
+    }
+
+    /* ── MASTER PSYCH CARD (three-strip anatomy) ─────────── */
+    .psy-card {
+      position: relative;
+      background: linear-gradient(180deg, var(--surface) 0%, var(--surface-2) 100%);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-lg);
+      overflow: hidden;
+      transition: var(--transition);
+      display: flex;
+      flex-direction: column;
+    }
+    .psy-card::before {
+      content: "";
+      position: absolute; top: 0; right: 0; bottom: 0;
+      width: 4px;
+      background: linear-gradient(180deg,
+        var(--layer-mech) 0%, var(--layer-mech) 33%,
+        var(--layer-trap) 33%, var(--layer-trap) 66%,
+        var(--layer-tactic) 66%, var(--layer-tactic) 100%);
+    }
+    .psy-card:hover {
+      border-color: var(--border-hover);
+      transform: translateY(-2px);
+      box-shadow: 0 12px 32px rgba(0,0,0,0.45), 0 0 0 1px var(--accent-soft);
+    }
+
+    .psy-card-head {
+      display: flex; align-items: flex-start; gap: 14px;
+      padding: 18px 22px 14px;
+      border-bottom: 1px dashed var(--border);
+      background: radial-gradient(circle at top right,
+        rgba(139,92,246,0.08), transparent 60%);
+    }
+    .psy-card-glyph {
+      width: 46px; height: 46px;
+      border-radius: var(--radius-md);
+      background: var(--surface-3);
+      border: 1px solid var(--border-hover);
+      display: flex; align-items: center; justify-content: center;
+      font-size: 22px;
+      flex-shrink: 0;
+      box-shadow: inset 0 0 20px rgba(139,92,246,0.15);
+    }
+    .psy-card-title-group { flex: 1; min-width: 0; }
+    .psy-card-index {
+      font-family: 'Courier New', monospace;
+      font-size: 10px;
+      font-weight: 700;
+      color: var(--freud-purple);
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      margin-bottom: 3px;
+    }
+    .psy-card-title {
+      font-size: 15px; font-weight: 800;
+      color: var(--text);
+      line-height: 1.4;
+      margin-bottom: 4px;
+    }
+    .psy-card-latin {
+      font-size: 10.5px;
+      color: var(--text-faint);
+      font-style: italic;
+      letter-spacing: 0.5px;
+    }
+    .psy-card-origin {
+      font-size: 10px;
+      color: var(--text-muted);
+      padding: 3px 8px;
+      background: var(--surface-3);
+      border: 1px solid var(--border);
+      border-radius: 99px;
+      white-space: nowrap;
+      flex-shrink: 0;
+      align-self: flex-start;
+    }
+
+    .psy-layer {
+      padding: 13px 22px 14px;
+      border-top: 1px solid var(--border);
+      position: relative;
+    }
+    .psy-layer:first-of-type { border-top: none; }
+    .psy-layer-label {
+      display: inline-flex; align-items: center; gap: 6px;
+      font-size: 10px; font-weight: 800;
+      letter-spacing: 1.2px;
+      text-transform: uppercase;
+      padding: 3px 9px;
+      border-radius: 99px;
+      margin-bottom: 9px;
+    }
+    .psy-layer-label .num {
+      width: 16px; height: 16px;
+      border-radius: 50%;
+      display: inline-flex; align-items: center; justify-content: center;
+      font-size: 10px; font-weight: 900;
+      background: currentColor; color: var(--bg);
+    }
+    .psy-layer-label .num::before {
+      color: var(--bg);
+      content: attr(data-n);
+    }
+    .psy-layer-text {
+      font-size: 12.5px;
+      color: var(--text);
+      line-height: 1.85;
+    }
+    .psy-layer-text strong { color: var(--text); font-weight: 800; }
+
+    .psy-layer.mech   { background: var(--layer-mech-bg); }
+    .psy-layer.mech   .psy-layer-label { color: var(--layer-mech); background: rgba(14,165,233,0.12); }
+    .psy-layer.trap   { background: var(--layer-trap-bg); }
+    .psy-layer.trap   .psy-layer-label { color: var(--layer-trap); background: rgba(239,68,68,0.12); }
+    .psy-layer.tactic { background: var(--layer-tactic-bg); }
+    .psy-layer.tactic .psy-layer-label { color: var(--layer-tactic); background: var(--accent-dim); }
+
+    .psy-script {
+      font-family: var(--font), sans-serif;
+      font-size: 12.5px;
+      color: var(--text);
+      line-height: 1.85;
+      background: linear-gradient(135deg, rgba(102,252,241,0.05), rgba(102,252,241,0.02));
+      border: 1px dashed rgba(102,252,241,0.35);
+      border-radius: var(--radius-md);
+      padding: 14px 16px 12px;
+      margin-top: 8px;
+      position: relative;
+      font-style: italic;
+    }
+    .psy-script::before {
+      content: "\201C";
+      position: absolute;
+      top: -14px; right: 10px;
+      font-size: 46px;
+      color: var(--accent);
+      font-family: Georgia, serif;
+      font-style: normal;
+      line-height: 1;
+      opacity: 0.6;
+    }
+    .psy-script + .psy-script { margin-top: 10px; }
+    .psy-script-meta {
+      display: flex; flex-wrap: wrap; gap: 5px;
+      margin-top: 10px;
+    }
+    .psy-script-meta span {
+      font-size: 9.5px; font-weight: 700;
+      padding: 3px 8px;
+      border-radius: 99px;
+      background: var(--surface-3);
+      color: var(--text-muted);
+      border: 1px solid var(--border);
+      letter-spacing: 0.3px;
+    }
+    .psy-script-meta span.voss   { color: var(--accent); border-color: var(--border-hover); }
+    .psy-script-meta span.nlp    { color: var(--freud-purple); border-color: rgba(139,92,246,0.35); }
+    .psy-script-meta span.cial   { color: var(--plutchik-trust); border-color: rgba(34,197,94,0.35); }
+
+    .mech-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(360px, 1fr));
+      gap: 18px;
+      margin-top: 20px;
+    }
+
+    .psy-signals {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 0;
+      border-top: 1px solid var(--border);
+      background: var(--surface);
+    }
+    .psy-signal {
+      padding: 11px 14px;
+      border-left: 1px solid var(--border);
+      font-size: 11.5px;
+      color: var(--text-muted);
+      line-height: 1.65;
+    }
+    .psy-signal:last-child { border-left: none; }
+    .psy-signal-head {
+      display: flex; align-items: center; gap: 6px;
+      font-size: 10px; font-weight: 800;
+      color: var(--text);
+      margin-bottom: 5px;
+      letter-spacing: 0.3px;
+    }
+    .psy-signal-head .dot {
+      width: 6px; height: 6px; border-radius: 50%;
+      background: var(--accent);
+      box-shadow: 0 0 8px var(--accent-glow);
+    }
+
+    .intensity-bar {
+      display: inline-flex; gap: 3px;
+      align-items: center;
+      vertical-align: middle;
+      margin-right: 6px;
+    }
+    .intensity-bar .pip {
+      width: 8px; height: 8px;
+      border-radius: 2px;
+      background: var(--surface-3);
+      border: 1px solid var(--border);
+    }
+    .intensity-bar .pip.on {
+      background: var(--freud-purple);
+      border-color: var(--freud-purple);
+      box-shadow: 0 0 6px rgba(139,92,246,0.6);
+    }
+
+    .nlp-chip {
+      display: inline-flex; align-items: center; gap: 5px;
+      font-size: 10.5px; font-weight: 700;
+      padding: 4px 10px;
+      border-radius: 99px;
+      background: rgba(139,92,246,0.08);
+      border: 1px solid rgba(139,92,246,0.28);
+      color: var(--freud-purple);
+      margin: 2px;
+    }
+
+    .black-swan {
+      display: flex; gap: 14px;
+      padding: 14px 16px;
+      margin: 14px 22px 18px;
+      background: linear-gradient(135deg, rgba(245,158,11,0.08), rgba(245,158,11,0.02));
+      border: 1px solid rgba(245,158,11,0.3);
+      border-right: 4px solid var(--insight);
+      border-radius: var(--radius-md);
+    }
+    .black-swan-icon {
+      font-size: 20px;
+      flex-shrink: 0;
+      filter: drop-shadow(0 0 8px rgba(245,158,11,0.5));
+    }
+    .black-swan-body { flex: 1; min-width: 0; }
+    .black-swan-label {
+      font-size: 9.5px; font-weight: 800;
+      color: var(--insight);
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+      margin-bottom: 4px;
+    }
+    .black-swan-text {
+      font-size: 12px;
+      color: var(--text);
+      line-height: 1.75;
+    }
+
+    .doctrine-hero {
+      position: relative;
+      background:
+        radial-gradient(circle at 15% 20%, rgba(139,92,246,0.15), transparent 50%),
+        radial-gradient(circle at 85% 80%, rgba(102,252,241,0.1), transparent 50%),
+        linear-gradient(135deg, var(--surface) 0%, var(--surface-2) 100%);
+      border: 1px solid var(--border-hover);
+      border-radius: var(--radius-lg);
+      padding: 26px 28px;
+      margin: 28px 0 22px;
+      overflow: hidden;
+    }
+    .doctrine-hero::after {
+      content: "";
+      position: absolute;
+      top: -40%; left: -20%;
+      width: 360px; height: 360px;
+      background: radial-gradient(circle, rgba(139,92,246,0.15), transparent 70%);
+      pointer-events: none;
+    }
+    .doctrine-hero-title {
+      font-size: 20px; font-weight: 800;
+      color: var(--text);
+      margin-bottom: 8px;
+      display: flex; align-items: center; gap: 10px;
+      flex-wrap: wrap;
+      position: relative; z-index: 1;
+    }
+    .doctrine-hero-title .badge {
+      font-size: 9px; font-weight: 800;
+      letter-spacing: 1.5px;
+      padding: 4px 10px;
+      background: var(--freud-purple);
+      color: #fff;
+      border-radius: 99px;
+    }
+    .doctrine-hero-sub {
+      font-size: 12.5px;
+      color: var(--text-muted);
+      line-height: 1.8;
+      max-width: 780px;
+      position: relative; z-index: 1;
+    }
+
+    .layer-legend {
+      display: flex; flex-wrap: wrap; gap: 10px;
+      margin-top: 16px;
+      position: relative; z-index: 1;
+    }
+    .layer-legend-item {
+      display: flex; align-items: center; gap: 8px;
+      padding: 8px 12px;
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 99px;
+      font-size: 11px;
+      color: var(--text);
+    }
+    .layer-legend-item .swatch {
+      width: 10px; height: 10px;
+      border-radius: 2px;
+    }
+
+    @media (max-width: 768px) {
+      .psy-signals { grid-template-columns: 1fr; }
+      .psy-signal { border-left: none; border-top: 1px solid var(--border); }
+      .psy-signal:first-child { border-top: none; }
+      .mech-grid { grid-template-columns: 1fr; gap: 14px; }
+      .psy-card-head { padding: 14px 18px 12px; }
+      .psy-layer { padding: 11px 18px 12px; }
+      .black-swan { margin: 12px 18px 14px; }
+      .doctrine-hero { padding: 20px 18px; }
+    }
+
   </style>
 </head>
 <body>
@@ -6197,6 +6552,713 @@
       </div>
 
     </section><!-- /page-psych -->
+
+    <!-- ═════════════════════════════════════════════════════════════
+         PHASE 1 — UNCONSCIOUS DEFENSE MECHANISMS (Freud / A. Freud)
+         Field-adapted for B2B sales, call-center & HR management.
+         Each card: ① Mechanism  ② Common Trap  ③ Tactical Script
+         ═════════════════════════════════════════════════════════════ -->
+    <script>
+      // Attach the defense-mechanism block to the existing psych page
+      (function () {
+        function attach() {
+          var host = document.getElementById('page-psych');
+          var block = document.getElementById('defense-mech-block');
+          if (host && block && block.parentNode !== host) {
+            host.appendChild(block);
+            block.style.display = 'block';
+          }
+        }
+        if (document.readyState === 'loading') {
+          document.addEventListener('DOMContentLoaded', attach);
+        } else {
+          attach();
+        }
+      })();
+    </script>
+
+    <div id="defense-mech-block" style="display:none;">
+
+      <!-- ── HERO / OVERTURE ── -->
+      <div class="doctrine-hero" style="margin-top:34px;">
+        <div class="doctrine-hero-title">
+          <span class="badge">Freudian Layer</span>
+          آليات الدفاع اللاشعورية — تشريح ما لا يقوله الزبون
+        </div>
+        <div class="doctrine-hero-sub">
+          حين يرفض العميل، أو يماطل، أو يهاجم، فهو في الغالب لا يتعامل معك أنت — بل مع <strong style="color:var(--text);">قلق داخلي</strong> يعجز عن تسميته، فيسقطه عليك. آليات الدفاع هي الطريقة التي يحمي بها اللاوعي الأنا (Ego) من مواجهة حقيقة مؤلمة: "أنا لا أملك المال"، "أنا خائف من الالتزام"، "أنا لست الشخص الذي يقرر فعلاً". مهمتك ليست كسر الدفاع — بل <strong style="color:var(--accent);">تسميته بلطف</strong> حتى يسقط من تلقاء نفسه (Tactical Empathy — Voss).
+        </div>
+        <div class="layer-legend">
+          <span class="layer-legend-item"><span class="swatch" style="background:var(--layer-mech);"></span>① الميكانيزم — ما يحدث في لاوعيه</span>
+          <span class="layer-legend-item"><span class="swatch" style="background:var(--layer-trap);"></span>② الفخ الشائع — ما يفعله ٩٠٪ من المندوبين</span>
+          <span class="layer-legend-item"><span class="swatch" style="background:var(--layer-tactic);"></span>③ السكريبت التكتيكي — الجملة الحرفية</span>
+        </div>
+      </div>
+
+      <!-- ── MATRIX GRID — 10 mechanisms ── -->
+      <div class="mech-grid">
+
+        <!-- ════════ 1. PROJECTION ════════ -->
+        <article class="psy-card">
+          <div class="psy-card-head">
+            <div class="psy-card-glyph">🪞</div>
+            <div class="psy-card-title-group">
+              <div class="psy-card-index">DEF · 01</div>
+              <div class="psy-card-title">الإسقاط — يُلبسك ما يخاف منه هو</div>
+              <div class="psy-card-latin">Projection · إسقاط الـ Anna Freud 1936</div>
+            </div>
+            <span class="psy-card-origin">فرويد · هوفمان</span>
+          </div>
+
+          <div class="psy-layer mech">
+            <span class="psy-layer-label"><span class="num">1</span> الميكانيزم</span>
+            <div class="psy-layer-text">
+              اللاوعي ينسب <strong>مشاعر/نوايا</strong> مرفوضة داخل الذات إلى الطرف الآخر. الزبون المتردد في القرار لا يقول "أنا خائف"، بل يقول: <em>"أنتم غير جادين"</em>. الزبون الذي لا يملك المال لا يقول "لا أستطيع"، بل: <em>"سعركم مبالغ فيه"</em>. هو لا يكذب — هو يحمي صورته أمام نفسه قبل أن يحميها أمامك.
+              <br><span class="intensity-bar" aria-label="التأثير"><span class="pip on"></span><span class="pip on"></span><span class="pip on"></span><span class="pip on"></span><span class="pip"></span></span>شائع جداً في قرارات الشراء الكبيرة.
+            </div>
+          </div>
+
+          <div class="psy-layer trap">
+            <span class="psy-layer-label"><span class="num">2</span> الفخ الشائع</span>
+            <div class="psy-layer-text">
+              تدافع عن المنتج أو عن الشركة: <em>"لا يا أستاذ، نحن جادون جداً ولدينا ٥٠٠ عميل..."</em>. بهذا تُثبّت الإسقاط، لأنك قبلت لعب دور "المتهم"، فأصبح هو <strong>القاضي</strong>. كل كلمة دفاع = تأكيد لسرديته.
+            </div>
+          </div>
+
+          <div class="psy-layer tactic">
+            <span class="psy-layer-label"><span class="num">3</span> سكريبت الاختراق</span>
+            <div class="psy-script">
+              يبدو أن شيئاً ما في <strong>التوقيت نفسه</strong> يجعلك متردداً — وليس في المنتج. هل أنا على صواب؟
+              <div class="psy-script-meta">
+                <span class="voss">Labeling</span>
+                <span class="voss">Mirror</span>
+                <span class="nlp">Reframing</span>
+              </div>
+            </div>
+            <div class="psy-script">
+              لو نسينا السعر لدقيقة واحدة فقط — ما الذي كان سيجعلك تقول "نعم" اليوم؟
+              <div class="psy-script-meta">
+                <span class="voss">Calibrated Q</span>
+                <span class="nlp">Future Pacing</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="psy-signals">
+            <div class="psy-signal">
+              <div class="psy-signal-head"><span class="dot"></span>📞 كول سنتر</div>
+              "إنتم بس عاوزين تبيعوا" — اتهامك بالجشع هو إسقاط لقلقه من خسارة المال.
+            </div>
+            <div class="psy-signal">
+              <div class="psy-signal-head"><span class="dot"></span>🚗 زيارة ميدانية</div>
+              يتحدث طوال الاجتماع عن "منافس غشّه" — هو يُسقط خوفه من أن تغشه أنت.
+            </div>
+            <div class="psy-signal">
+              <div class="psy-signal-head"><span class="dot"></span>👔 موظف</div>
+              "المدير لا يرى مجهوداتي" — غالباً لأنه هو لا يرى قيمة ما يفعل.
+            </div>
+          </div>
+
+          <div class="black-swan">
+            <div class="black-swan-icon">🦢</div>
+            <div class="black-swan-body">
+              <div class="black-swan-label">Black Swan</div>
+              <div class="black-swan-text">
+                المُسقِط ينتقي دائماً كلمة واحدة تكشفه. راقب الصفات التي يستخدمها للمنافسين: <strong>"مخادع، بطيء، كذاب"</strong>. هذه هي بالضبط الصفات التي يخشى أن يراه الآخرون بها.
+              </div>
+            </div>
+          </div>
+        </article>
+
+        <!-- ════════ 2. RATIONALIZATION ════════ -->
+        <article class="psy-card">
+          <div class="psy-card-head">
+            <div class="psy-card-glyph">⚖️</div>
+            <div class="psy-card-title-group">
+              <div class="psy-card-index">DEF · 02</div>
+              <div class="psy-card-title">التبرير — منطق زائف يحمي قراراً عاطفياً</div>
+              <div class="psy-card-latin">Rationalization · Ernest Jones 1908</div>
+            </div>
+            <span class="psy-card-origin">جونز · فرويد</span>
+          </div>
+
+          <div class="psy-layer mech">
+            <span class="psy-layer-label"><span class="num">1</span> الميكانيزم</span>
+            <div class="psy-layer-text">
+              العقل يتخذ القرار عاطفياً خلال <strong>٩٠ ثانية</strong> (Damasio)، ثم يختلق لاحقاً "أسباباً منطقية" ليُقنع صاحبه أن القرار عقلاني. الزبون الذي لا يريد الشراء — لأي سبب كان — سيُنتج قائمة لا تنتهي من "الاعتراضات المنطقية": السعر، التوقيت، الجودة، الشكل. وكلما فنّدت اعتراضاً ظهر اعتراض جديد. لأن الاعتراضات ليست هي المشكلة.
+            </div>
+          </div>
+
+          <div class="psy-layer trap">
+            <span class="psy-layer-label"><span class="num">2</span> الفخ الشائع</span>
+            <div class="psy-layer-text">
+              تدخل في "معركة منطق": تُفنّد كل اعتراض ببيانات ومقارنات. كلما فزت بنقطة، هو يتراجع خطوة للخلف ليحمي قراره الأصلي، ويخترع اعتراضاً أقوى. تنتهي المكالمة وأنت مرهق، وهو "مقتنع علمياً بعدم الشراء".
+            </div>
+          </div>
+
+          <div class="psy-layer tactic">
+            <span class="psy-layer-label"><span class="num">3</span> سكريبت الاختراق</span>
+            <div class="psy-script">
+              أفهمك تماماً — هذه أسباب وجيهة. <strong>لكن لو تجاوزنا السعر والتوقيت معاً</strong>، هل كنت ستشتري اليوم؟ لأنني أشعر أن هناك سبباً واحداً حقيقياً وراء الأسباب الأخرى.
+              <div class="psy-script-meta">
+                <span class="voss">No-Oriented Q</span>
+                <span class="voss">Labeling</span>
+                <span class="nlp">Meta-Model</span>
+              </div>
+            </div>
+            <div class="psy-script">
+              لو كان هذا قراراً يخص شقيقك الأصغر — بنفس المال ونفس الوضع — ماذا كنت ستنصحه؟
+              <div class="psy-script-meta">
+                <span class="nlp">Dissociation</span>
+                <span class="voss">Perspective Shift</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="psy-signals">
+            <div class="psy-signal">
+              <div class="psy-signal-head"><span class="dot"></span>📞 كول سنتر</div>
+              كل ما فنّدت اعتراضاً ظهر اعتراض جديد = تبرير متسلسل.
+            </div>
+            <div class="psy-signal">
+              <div class="psy-signal-head"><span class="dot"></span>🚗 ميداني</div>
+              "أنا مقتنع لكن شريكي يحتاج يفكر" — الشريك غير موجود غالباً.
+            </div>
+            <div class="psy-signal">
+              <div class="psy-signal-head"><span class="dot"></span>👔 موظف</div>
+              يُبرّر تأخره في المهام بأسباب تقنية متجددة أسبوعياً.
+            </div>
+          </div>
+
+          <div class="black-swan">
+            <div class="black-swan-icon">🦢</div>
+            <div class="black-swan-body">
+              <div class="black-swan-label">Black Swan</div>
+              <div class="black-swan-text">
+                اختبار الحقيقة: أزل <strong>جميع</strong> الاعتراضات دفعة واحدة افتراضياً ("لو كان السعر نصف والتوصيل غداً..."). إن ظهر اعتراض جديد، فأنت أمام تبرير، والقرار الحقيقي في طبقة أعمق — <em>خوف أو عدم ثقة أو سلطة قرار في مكان آخر</em>.
+              </div>
+            </div>
+          </div>
+        </article>
+
+        <!-- ════════ 3. DISPLACEMENT ════════ -->
+        <article class="psy-card">
+          <div class="psy-card-head">
+            <div class="psy-card-glyph">🎯</div>
+            <div class="psy-card-title-group">
+              <div class="psy-card-index">DEF · 03</div>
+              <div class="psy-card-title">الإزاحة — يفرغ غضبه في هدف آمن</div>
+              <div class="psy-card-latin">Displacement · S. Freud 1900</div>
+            </div>
+            <span class="psy-card-origin">فرويد</span>
+          </div>
+
+          <div class="psy-layer mech">
+            <span class="psy-layer-label"><span class="num">1</span> الميكانيزم</span>
+            <div class="psy-layer-text">
+              حين يعجز الإنسان عن توجيه انفعاله نحو المصدر الحقيقي (المدير، الزوجة، الدَّين، الفشل)، فإنه <strong>يُزيحه نحو هدف بديل منخفض التكلفة الاجتماعية</strong>: مندوب المبيعات، موظف خدمة العملاء، الطاولة التي يضربها بقدمه. الصراخ الذي تتلقاه على الهاتف ليس موجهاً إليك — أنت مجرد <em>محطة تفريغ آمنة</em>.
+            </div>
+          </div>
+
+          <div class="psy-layer trap">
+            <span class="psy-layer-label"><span class="num">2</span> الفخ الشائع</span>
+            <div class="psy-layer-text">
+              أحد أمرين قاتلين: (أ) ترد بنفس النبرة فتتحوّل إلى مصدر تهديد حقيقي، فيتضاعف العدوان؛ أو (ب) تعتذر بشكل مبالَغ فيه وتنهار مهنياً — فيكتشف لاوعيه أنه عثر على "كيس ملاكمة مجاني" ويكرر ذلك كل أسبوع.
+            </div>
+          </div>
+
+          <div class="psy-layer tactic">
+            <span class="psy-layer-label"><span class="num">3</span> سكريبت الاختراق</span>
+            <div class="psy-script">
+              يبدو أن يومك كان <strong>مرهقاً جداً</strong> قبل هذه المكالمة… هل أنا محق؟ خذ نفساً — لن أقاطعك — أخبرني بالضبط ما الذي تريد أن يحدث الآن.
+              <div class="psy-script-meta">
+                <span class="voss">Accusation Audit</span>
+                <span class="voss">Labeling</span>
+                <span class="nlp">Pacing</span>
+              </div>
+            </div>
+            <div class="psy-script">
+              أنا هنا <strong>لأحلّ</strong>، لا لأدافع. أعطني ٣٠ ثانية فقط أفهم منك ماذا حدث بالضبط.
+              <div class="psy-script-meta">
+                <span class="voss">That's Right</span>
+                <span class="cial">Reciprocity</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="psy-signals">
+            <div class="psy-signal">
+              <div class="psy-signal-head"><span class="dot"></span>📞 كول سنتر</div>
+              صراخ في الثانية الأولى بلا مقدمات = إزاحة من خارج المكالمة.
+            </div>
+            <div class="psy-signal">
+              <div class="psy-signal-head"><span class="dot"></span>🚗 ميداني</div>
+              يهاجم تفصيلاً تافهاً (ربطة عنقك) بدل المنتج = تفريغ.
+            </div>
+            <div class="psy-signal">
+              <div class="psy-signal-head"><span class="dot"></span>👔 موظف</div>
+              يغضب من الزملاء بعد اجتماع مع المدير = إزاحة عمودية.
+            </div>
+          </div>
+
+          <div class="black-swan">
+            <div class="black-swan-icon">🦢</div>
+            <div class="black-swan-body">
+              <div class="black-swan-label">Black Swan</div>
+              <div class="black-swan-text">
+                الصمت المُعايَر لمدة ٤-٦ ثوانٍ بعد نوبة الغضب أقوى من أي رد. اللاوعي يفسّر صمتك على أنه <strong>ثبات</strong> لا ضعف، فيُسقط الخصم شحنته ويصبح مستعداً للحوار. لا تملأ الصمت.
+              </div>
+            </div>
+          </div>
+        </article>
+
+        <!-- ════════ 4. DENIAL ════════ -->
+        <article class="psy-card">
+          <div class="psy-card-head">
+            <div class="psy-card-glyph">🙈</div>
+            <div class="psy-card-title-group">
+              <div class="psy-card-index">DEF · 04</div>
+              <div class="psy-card-title">الإنكار — يرفض رؤية ما هو واضح</div>
+              <div class="psy-card-latin">Denial · Anna Freud 1936</div>
+            </div>
+            <span class="psy-card-origin">آنا فرويد</span>
+          </div>
+
+          <div class="psy-layer mech">
+            <span class="psy-layer-label"><span class="num">1</span> الميكانيزم</span>
+            <div class="psy-layer-text">
+              الأنا (Ego) تتجاهل واقعاً مهدِّداً لأن الاعتراف به يستدعي <strong>ألم التغيير</strong>. المدير الذي شركته تخسر يقول: "الربع القادم سنعوّض". العميل الذي منافسه يأكل سوقه يقول: "زبائننا أوفياء". هذا ليس غباءً — هو طبقة حماية تمنع انهيار صورة الذات.
+            </div>
+          </div>
+
+          <div class="psy-layer trap">
+            <span class="psy-layer-label"><span class="num">2</span> الفخ الشائع</span>
+            <div class="psy-layer-text">
+              تصفعه بالأرقام والإحصائيات: <em>"لكن يا أستاذ، حصتكم السوقية تراجعت ١٨٪ هذا الربع..."</em>. الإنكار لا يُخترق بالحقائق — يتحوّل إلى <strong>مقاومة عدائية</strong>. الحقائق تُفعّل الدفاع لا تُسقطه.
+            </div>
+          </div>
+
+          <div class="psy-layer tactic">
+            <span class="psy-layer-label"><span class="num">3</span> سكريبت الاختراق</span>
+            <div class="psy-script">
+              <strong>لنفترض</strong> — افتراضاً فقط — أن ما أقوله صحيح: ماذا سيعني ذلك لقراراتك خلال الـ ٦ أشهر القادمة؟
+              <div class="psy-script-meta">
+                <span class="nlp">Hypothetical Frame</span>
+                <span class="voss">Calibrated Q</span>
+              </div>
+            </div>
+            <div class="psy-script">
+              أنا متأكد أنك فكّرت في هذا الاحتمال من قبل. <strong>لو رأيت دليلاً واحداً يؤكد ذلك</strong>، أي دليل يكون مقنعاً بالنسبة لك شخصياً؟
+              <div class="psy-script-meta">
+                <span class="cial">Commitment</span>
+                <span class="nlp">Future Pacing</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="psy-signals">
+            <div class="psy-signal">
+              <div class="psy-signal-head"><span class="dot"></span>📞 كول سنتر</div>
+              "نظامنا ممتاز ولا يحتاج تحديث" — والأعطال أسبوعية.
+            </div>
+            <div class="psy-signal">
+              <div class="psy-signal-head"><span class="dot"></span>🚗 ميداني</div>
+              "سوقنا مختلف، هذه الأرقام لا تنطبق علينا" — شعار الإنكار الأول.
+            </div>
+            <div class="psy-signal">
+              <div class="psy-signal-head"><span class="dot"></span>👔 موظف</div>
+              إنكار الخطأ رغم الإثبات = خوف من فقدان الوظيفة، لا كذب.
+            </div>
+          </div>
+        </article>
+
+        <!-- ════════ 5. REPRESSION ════════ -->
+        <article class="psy-card">
+          <div class="psy-card-head">
+            <div class="psy-card-glyph">🗝️</div>
+            <div class="psy-card-title-group">
+              <div class="psy-card-index">DEF · 05</div>
+              <div class="psy-card-title">الكبت — يدفن التجربة السيئة قبل مقابلتك</div>
+              <div class="psy-card-latin">Repression · S. Freud 1915</div>
+            </div>
+            <span class="psy-card-origin">فرويد</span>
+          </div>
+
+          <div class="psy-layer mech">
+            <span class="psy-layer-label"><span class="num">1</span> الميكانيزم</span>
+            <div class="psy-layer-text">
+              ذكرى مؤلمة (عملية نصب سابقة، فشل منتج، خلاف مع مورّد) تُدفَن في اللاوعي لأنها تتحدى ثقة الشخص بحكمه. لا يستطيع الزبون أن يشرح لك لماذا يرفض قطاعك بالكامل — <strong>فقط يشعر بعدم الارتياح</strong>. الكبت لا يُحذف، بل يُخزَّن كـ "نفور حدسي" غير مبرَّر.
+            </div>
+          </div>
+
+          <div class="psy-layer trap">
+            <span class="psy-layer-label"><span class="num">2</span> الفخ الشائع</span>
+            <div class="psy-layer-text">
+              تفسّر الرفض على أنه "اعتراض على السعر" وتُعيد العرض بخصم. الخصم لا يُحرّك شيئاً لأن المشكلة الحقيقية ليست مالية — بل <strong>جرح قديم لم يلتئم</strong>.
+            </div>
+          </div>
+
+          <div class="psy-layer tactic">
+            <span class="psy-layer-label"><span class="num">3</span> سكريبت الاختراق</span>
+            <div class="psy-script">
+              يبدو أن <strong>تجربة سابقة</strong> مع شركة تشبهنا تركت أثراً. لن أطلب منك الشراء اليوم — فقط أريد أن أفهم: ماذا حدث بالضبط؟
+              <div class="psy-script-meta">
+                <span class="voss">Labeling</span>
+                <span class="voss">Accusation Audit</span>
+              </div>
+            </div>
+            <div class="psy-script">
+              إن كان هناك شيء تتمنى لو سألك البائع السابق عنه — وما سألك — ما هو؟
+              <div class="psy-script-meta">
+                <span class="nlp">Reframing</span>
+                <span class="voss">Calibrated Q</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="psy-signals">
+            <div class="psy-signal">
+              <div class="psy-signal-head"><span class="dot"></span>📞 كول سنتر</div>
+              رفض بارد من أول ثانية دون سبب = كبت مُفعَّل برنة الهاتف نفسها.
+            </div>
+            <div class="psy-signal">
+              <div class="psy-signal-head"><span class="dot"></span>🚗 ميداني</div>
+              توتر جسدي عند ذكر اسم قطاعك (كتفان متصلّبان) = جسد يتذكر.
+            </div>
+            <div class="psy-signal">
+              <div class="psy-signal-head"><span class="dot"></span>👔 موظف</div>
+              قلق من اجتماع تقييم لا مبرر منطقي له = كبت لصدمة إدارية سابقة.
+            </div>
+          </div>
+        </article>
+
+        <!-- ════════ 6. REACTION FORMATION ════════ -->
+        <article class="psy-card">
+          <div class="psy-card-head">
+            <div class="psy-card-glyph">🎭</div>
+            <div class="psy-card-title-group">
+              <div class="psy-card-index">DEF · 06</div>
+              <div class="psy-card-title">التكوين العكسي — يُبالغ في النقيض</div>
+              <div class="psy-card-latin">Reaction Formation · Ferenczi</div>
+            </div>
+            <span class="psy-card-origin">فيرينتشي</span>
+          </div>
+
+          <div class="psy-layer mech">
+            <span class="psy-layer-label"><span class="num">1</span> الميكانيزم</span>
+            <div class="psy-layer-text">
+              حين تكون الرغبة الحقيقية مرفوضة أخلاقياً أو اجتماعياً، يلبس اللاوعي <strong>قناع نقيضها بحدة مبالَغ فيها</strong>. العميل الذي يحتاج المنتج أكثر من الجميع يهاجمه بعنف ("هذا غير مفيد إطلاقاً"). المدير الذي يخاف موظفاً كفؤاً يُفرط في مدحه علناً ويُعرقله سراً. <strong>كلما زاد الحماس في الاتجاه الواحد، شكّ في النقيض الكامن</strong>.
+            </div>
+          </div>
+
+          <div class="psy-layer trap">
+            <span class="psy-layer-label"><span class="num">2</span> الفخ الشائع</span>
+            <div class="psy-layer-text">
+              تصدّق الواجهة. تضع هذا العميل في قائمة "مرفوض نهائياً" بينما هو في الواقع <strong>الأقرب للشراء</strong> — يحتاج فقط إذناً نفسياً بالتراجع عن موقفه دون أن يخسر ماء وجهه.
+            </div>
+          </div>
+
+          <div class="psy-layer tactic">
+            <span class="psy-layer-label"><span class="num">3</span> سكريبت الاختراق</span>
+            <div class="psy-script">
+              يبدو أنك <strong>درست هذا المنتج جيداً</strong> لتصل إلى هذا الموقف القوي منه — وهذا محترم. أخبرني: ما الذي لو تغيّر فيه، كنت ستعيد النظر؟
+              <div class="psy-script-meta">
+                <span class="cial">Liking</span>
+                <span class="voss">Labeling</span>
+                <span class="nlp">Reframing</span>
+              </div>
+            </div>
+            <div class="psy-script">
+              لو أراد أحد معارفك المقربين هذا النوع من الحل، <strong>ماذا كنت ستنصحه أن يبحث عنه</strong>؟
+              <div class="psy-script-meta">
+                <span class="nlp">Dissociation</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="psy-signals">
+            <div class="psy-signal">
+              <div class="psy-signal-head"><span class="dot"></span>📞 كول سنتر</div>
+              هجوم عنيف في أول ٣٠ ثانية = قرب شديد من القرار المكبوت.
+            </div>
+            <div class="psy-signal">
+              <div class="psy-signal-head"><span class="dot"></span>🚗 ميداني</div>
+              يمدح منافسك بشكل مبالغ فيه = غالباً لم يشتر منه.
+            </div>
+            <div class="psy-signal">
+              <div class="psy-signal-head"><span class="dot"></span>👔 موظف</div>
+              إفراط في الولاء العلني لمدير يكرهه = قلق فقدان الوظيفة.
+            </div>
+          </div>
+        </article>
+
+        <!-- ════════ 7. IDENTIFICATION ════════ -->
+        <article class="psy-card">
+          <div class="psy-card-head">
+            <div class="psy-card-glyph">🧬</div>
+            <div class="psy-card-title-group">
+              <div class="psy-card-index">DEF · 07</div>
+              <div class="psy-card-title">التقمّص — يلبس هوية الأقوى</div>
+              <div class="psy-card-latin">Identification · Freud 1921</div>
+            </div>
+            <span class="psy-card-origin">فرويد</span>
+          </div>
+
+          <div class="psy-layer mech">
+            <span class="psy-layer-label"><span class="num">1</span> الميكانيزم</span>
+            <div class="psy-layer-text">
+              يتبنّى الفرد سمات شخص/علامة/طبقة ليكتسب قوّتها النفسية (Identification with the Aggressor عند آنا فرويد). العميل الذي "يحفظ" مواصفات أعلى باقات منافسك لا يملك قراراً شرائياً — <strong>يستعير هوية النخبة</strong>. مدير المشتريات الذي يذكر ارتباطه بـ CEO كل دقيقة يحاول استعارة سلطة ليست له.
+            </div>
+          </div>
+
+          <div class="psy-layer trap">
+            <span class="psy-layer-label"><span class="num">2</span> الفخ الشائع</span>
+            <div class="psy-layer-text">
+              تعامله كمن يحمل القرار فعلاً، فتضيع ٣ اجتماعات قبل أن تكتشف أنه <strong>حارس بوابة</strong> لا مالك قرار. أو تحاول كسر وهمه بالمنطق، فيتشبث أكثر.
+            </div>
+          </div>
+
+          <div class="psy-layer tactic">
+            <span class="psy-layer-label"><span class="num">3</span> سكريبت الاختراق</span>
+            <div class="psy-script">
+              واضح أن خبرتك في هذا الملف عميقة — <strong>من الذي سيوقّع معك على القرار النهائي؟</strong> أريد أن أحضّر له ما يحتاجه مباشرة حتى لا أضيع وقتك في تكرار العرض.
+              <div class="psy-script-meta">
+                <span class="cial">Authority</span>
+                <span class="voss">Calibrated Q</span>
+              </div>
+            </div>
+            <div class="psy-script">
+              شركات بحجم شركتكم تقرر عادة عبر <strong>لجنة من ٣ أشخاص</strong>. من هم الثلاثة في حالتكم؟
+              <div class="psy-script-meta">
+                <span class="cial">Social Proof</span>
+                <span class="nlp">Presupposition</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="psy-signals">
+            <div class="psy-signal">
+              <div class="psy-signal-head"><span class="dot"></span>📞 كول سنتر</div>
+              إفراط في المصطلحات التقنية = يستعير هوية الخبير.
+            </div>
+            <div class="psy-signal">
+              <div class="psy-signal-head"><span class="dot"></span>🚗 ميداني</div>
+              ذكر الـ CEO في كل جملة = حارس بوابة يحاول تضخيم نفسه.
+            </div>
+            <div class="psy-signal">
+              <div class="psy-signal-head"><span class="dot"></span>👔 موظف</div>
+              تقليد لهجة المدير وملابسه = رغبة في الصعود بالتقمّص لا بالأداء.
+            </div>
+          </div>
+        </article>
+
+        <!-- ════════ 8. REGRESSION ════════ -->
+        <article class="psy-card">
+          <div class="psy-card-head">
+            <div class="psy-card-glyph">👶</div>
+            <div class="psy-card-title-group">
+              <div class="psy-card-index">DEF · 08</div>
+              <div class="psy-card-title">النكوص — يعود إلى سلوك طفولي تحت الضغط</div>
+              <div class="psy-card-latin">Regression · Freud 1914</div>
+            </div>
+            <span class="psy-card-origin">فرويد</span>
+          </div>
+
+          <div class="psy-layer mech">
+            <span class="psy-layer-label"><span class="num">1</span> الميكانيزم</span>
+            <div class="psy-layer-text">
+              تحت ضغط قرار صعب، يتراجع الفرد إلى نمط سلوكي من مرحلة نمو سابقة: عناد طفولي ("أنا قلت لا ولا")، أو سعي للحماية ("اسأل أمك = اسأل مديري"). تعليق القرار ليس تردداً عقلياً — <strong>هو بحث لاشعوري عن "أب" يقرر بدلاً عنه</strong>.
+            </div>
+          </div>
+
+          <div class="psy-layer trap">
+            <span class="psy-layer-label"><span class="num">2</span> الفخ الشائع</span>
+            <div class="psy-layer-text">
+              تضغط أكثر وتطلب حسماً فورياً. الضغط يُفعّل طبقة النكوص أكثر، فيصبح الرد عناداً كاملاً: "لا، أبداً، بدون نقاش". خسرت الصفقة التي كانت على بعد سؤال واحد.
+            </div>
+          </div>
+
+          <div class="psy-layer tactic">
+            <span class="psy-layer-label"><span class="num">3</span> سكريبت الاختراق</span>
+            <div class="psy-script">
+              لن أطلب منك قراراً اليوم — <strong>فقط خطوة صغيرة</strong>: هل يناسبك أن أرسل لك ملخصاً في سطرين تراجعه مع من تثق به؟
+              <div class="psy-script-meta">
+                <span class="cial">Commitment</span>
+                <span class="voss">No-Oriented Q</span>
+                <span class="nlp">Chunk Down</span>
+              </div>
+            </div>
+            <div class="psy-script">
+              أفهم أن القرار يستحق التفكير. <strong>من الشخص الذي ستستشيره عادةً</strong> في مثل هذه القرارات؟ أحضّر لكما معاً.
+              <div class="psy-script-meta">
+                <span class="voss">Calibrated Q</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="psy-signals">
+            <div class="psy-signal">
+              <div class="psy-signal-head"><span class="dot"></span>📞 كول سنتر</div>
+              إغلاق مفاجئ بلا سبب ("ما ينفع خلاص") = نكوص طفولي.
+            </div>
+            <div class="psy-signal">
+              <div class="psy-signal-head"><span class="dot"></span>🚗 ميداني</div>
+              "لازم أسأل زوجتي/شريكي" في صفقة B2B = بحث عن سلطة أبوية.
+            </div>
+            <div class="psy-signal">
+              <div class="psy-signal-head"><span class="dot"></span>👔 موظف</div>
+              تفادي المسؤولية وإحالتها للمدير في كل مرة = نكوص وظيفي.
+            </div>
+          </div>
+        </article>
+
+        <!-- ════════ 9. INTELLECTUALIZATION ════════ -->
+        <article class="psy-card">
+          <div class="psy-card-head">
+            <div class="psy-card-glyph">🧠</div>
+            <div class="psy-card-title-group">
+              <div class="psy-card-index">DEF · 09</div>
+              <div class="psy-card-title">الفكرنة — يحوّل القلق إلى تحليل بارد</div>
+              <div class="psy-card-latin">Intellectualization · Vaillant</div>
+            </div>
+            <span class="psy-card-origin">فيالانت</span>
+          </div>
+
+          <div class="psy-layer mech">
+            <span class="psy-layer-label"><span class="num">1</span> الميكانيزم</span>
+            <div class="psy-layer-text">
+              الشعور المزعج يُغلَّف بـ <strong>تحليل منطقي معقّد</strong> لخلق مسافة عاطفية. العميل المرعوب من توقيع عقد طويل يطلب "دراسة ROI متعمقة لـ ٧ سنوات" — ليس لأنه يحتاجها، بل ليُطفئ القلق. هذا هو الفخ المفضّل لقطاعات التقنية والهندسة والمالية.
+            </div>
+          </div>
+
+          <div class="psy-layer trap">
+            <span class="psy-layer-label"><span class="num">2</span> الفخ الشائع</span>
+            <div class="psy-layer-text">
+              تلبّي طلبه بـ ٤٠ صفحة Excel وجداول حساسية. كلما ازدادت البيانات، ازدادت طبقة الحماية المعرفية، وتحوّلت الصفقة إلى <strong>ماراثون أبدي</strong> بلا قرار.
+            </div>
+          </div>
+
+          <div class="psy-layer tactic">
+            <span class="psy-layer-label"><span class="num">3</span> سكريبت الاختراق</span>
+            <div class="psy-script">
+              البيانات موجودة ودقيقة. <strong>لكن بيننا</strong> — لو تجاوزنا الأرقام — ما الذي يقلقك شخصياً في هذا القرار؟
+              <div class="psy-script-meta">
+                <span class="voss">Labeling</span>
+                <span class="nlp">State Shift</span>
+              </div>
+            </div>
+            <div class="psy-script">
+              لو قدّمت لك جميع الأرقام التي تريدها، <strong>في أي تاريخ</strong> سنوقّع؟
+              <div class="psy-script-meta">
+                <span class="voss">Calibrated Q</span>
+                <span class="nlp">Future Pacing</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="psy-signals">
+            <div class="psy-signal">
+              <div class="psy-signal-head"><span class="dot"></span>📞 كول سنتر</div>
+              طلب مواصفات تقنية معقدة لمنتج استهلاكي بسيط = فكرنة.
+            </div>
+            <div class="psy-signal">
+              <div class="psy-signal-head"><span class="dot"></span>🚗 ميداني</div>
+              "أحتاج دراسة مقارنة" بعد ٤ اجتماعات = قلق مُغلَّف.
+            </div>
+            <div class="psy-signal">
+              <div class="psy-signal-head"><span class="dot"></span>👔 موظف</div>
+              يتحدث عن مشروع فاشل بلغة تقنية باردة = نفي لمسؤوليته العاطفية.
+            </div>
+          </div>
+        </article>
+
+        <!-- ════════ 10. SUBLIMATION ════════ -->
+        <article class="psy-card">
+          <div class="psy-card-head">
+            <div class="psy-card-glyph">⛰️</div>
+            <div class="psy-card-title-group">
+              <div class="psy-card-index">DEF · 10</div>
+              <div class="psy-card-title">التسامي — يحوّل الطاقة المكبوتة إلى إنجاز</div>
+              <div class="psy-card-latin">Sublimation · Freud 1905</div>
+            </div>
+            <span class="psy-card-origin">فرويد (ناضج)</span>
+          </div>
+
+          <div class="psy-layer mech">
+            <span class="psy-layer-label"><span class="num">1</span> الميكانيزم</span>
+            <div class="psy-layer-text">
+              الميكانيزم <strong>الوحيد الإيجابي</strong> في منظومة الدفاع (Vaillant: Mature Defense). توجيه طاقة مكبوتة أو مرفوضة اجتماعياً نحو هدف مُبدِع ومقبول. المدير الذي مرّ بإفلاس سابق يبني الشركة الأكثر انضباطاً. العميل الذي خُدِع سابقاً يصبح أصعب مفاوض — وإن أقنعته، أوفى زبون لديك.
+            </div>
+          </div>
+
+          <div class="psy-layer trap">
+            <span class="psy-layer-label"><span class="num">2</span> الفخ الشائع</span>
+            <div class="psy-layer-text">
+              تتعامل مع صعوبته كعقبة تتجاوزها، لا كـ <strong>بصمة قيمة</strong>. تُجامله وتُبسّط، فيفقد احترامه لك ولعرضك. التسامي يحترم فقط من يتجاوز سقف إتقانه.
+            </div>
+          </div>
+
+          <div class="psy-layer tactic">
+            <span class="psy-layer-label"><span class="num">3</span> سكريبت الاختراق</span>
+            <div class="psy-script">
+              معاييرك <strong>أعلى من معايير السوق عن قصد</strong>. لذلك أريد أن أريك الجزء الذي يرفضه ٩٠٪ من موردينا — وأنت وحدك ستفهم لماذا هو مهم.
+              <div class="psy-script-meta">
+                <span class="cial">Liking</span>
+                <span class="cial">Scarcity</span>
+                <span class="nlp">Reframing</span>
+              </div>
+            </div>
+            <div class="psy-script">
+              تجربتك السابقة علّمتك ما يجب تجنّبه. <strong>ما هي المعايير الثلاثة الأولى</strong> التي لن تتنازل عنها أبداً؟
+              <div class="psy-script-meta">
+                <span class="voss">Calibrated Q</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="psy-signals">
+            <div class="psy-signal">
+              <div class="psy-signal-head"><span class="dot"></span>📞 كول سنتر</div>
+              أسئلة ذكية عميقة من أول مكالمة = خبرة مؤلمة تحولت لخبرة نافعة.
+            </div>
+            <div class="psy-signal">
+              <div class="psy-signal-head"><span class="dot"></span>🚗 ميداني</div>
+              معايير اختيار صارمة ومنطقية = تسامٍ مثمر، عميل ذهبي بشرط إقناعه.
+            </div>
+            <div class="psy-signal">
+              <div class="psy-signal-head"><span class="dot"></span>👔 موظف</div>
+              يحوّل إحباطات سابقة إلى أنظمة ومنهجيات = قيادي مستقبلي.
+            </div>
+          </div>
+
+          <div class="black-swan">
+            <div class="black-swan-icon">🦢</div>
+            <div class="black-swan-body">
+              <div class="black-swan-label">Black Swan</div>
+              <div class="black-swan-text">
+                مع المُتسامي، لا تبيع المنتج — <strong>بِع الاحترام المهني</strong>. قل له صراحةً: "هذا الجزء لن يعجبك، ولدينا تحفّظ عليه بأنفسنا". الشفافية هي العملة الوحيدة التي يشتري بها.
+              </div>
+            </div>
+          </div>
+        </article>
+
+      </div><!-- /mech-grid -->
+
+      <!-- ── CLOSING DOCTRINE CARD ── -->
+      <div style="background:linear-gradient(135deg,rgba(139,92,246,0.08),rgba(102,252,241,0.04));border:1px solid rgba(139,92,246,0.3);border-radius:var(--radius-lg);padding:24px 26px;margin-top:26px;">
+        <div style="display:flex;align-items:flex-start;gap:16px;">
+          <div style="font-size:30px;flex-shrink:0;margin-top:2px;">🎓</div>
+          <div>
+            <div style="font-size:15px;font-weight:800;color:var(--text);margin-bottom:10px;">قاعدة فرويدية للتطبيق اليومي</div>
+            <div style="font-size:12.5px;color:var(--text-muted);line-height:1.85;">
+              كل اعتراض تسمعه يحتوي طبقتين: <strong style="color:var(--layer-mech);">الطبقة السطحية</strong> (ما يقوله) و<strong style="color:var(--layer-trap);">الطبقة اللاشعورية</strong> (ما يحميه). المحترف يسمع الطبقتين معاً، ويردّ على اللاشعورية فقط. حين تضرب الدفاع في صميمه بلطف — يسقط بصاحبه نحوك، لا ضدك. هذا هو الفرق بين <em>بائع يضغط</em> و<em>مستشار يُستَدعى</em>.
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div><!-- /defense-mech-block -->
+
 
     <style>
     /* ── Psych page role-tab scripts ── */
